@@ -1,0 +1,25 @@
+package com.inn.expo;
+
+import com.inn.expo.editor.Editor;
+import com.inn.expo.listeners.impl.EmailNotificationListener;
+import com.inn.expo.listeners.impl.LogOpenListener;
+
+/**
+ * Hello world!
+ *
+ */
+public class App 
+{
+	  public static void main(String[] args) {
+	        Editor editor = new Editor();
+	        editor.events.subscribe("open", new LogOpenListener("/path/to/log/file.txt"));
+	        editor.events.subscribe("save", new EmailNotificationListener("admin@example.com"));
+
+	        try {
+	            editor.openFile("test.txt");
+	            editor.saveFile();
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	    }
+}
